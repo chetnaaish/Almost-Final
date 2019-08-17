@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Add details</title>
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<script>
+$(function(){
+$("#addDetails").submit(function(evt){
+	evt.preventDefault();
+var obj={
+		custid : $("#custid").val(),
+		firstName : $("#fname").val(),
+		lastName : $("#lname").val()
+	
+
+}
+$.ajax({
+url:'updateauthorisedcustomer.lti',
+method:'POST',
+data:JSON.stringify(obj),
+contentType:'application/json',
+success:function(response){
+	alert(JSON.stringify(response));
+          }
+       })
+    })
+})
+
+</script>
+</head>
+
+<body>
+<form id="addDetails">
+	Enter AUTHORISED CUSTOMER ID : <input type='text' id="custid"/><br/>
+	Enter FIRST NAME : <input type='text' id="fname"/><br/>
+	Enter LAST NAME : <input type='text' id="lname"/><br/>
+
+	<button type="submit">update</button>
+</form>
+
+</body>

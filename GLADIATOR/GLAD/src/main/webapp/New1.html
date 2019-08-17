@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script
+src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<script>
+$(function() {
+
+$("#my_form").submit(function(event){
+	event.preventDefault(); 
+	
+	var obj={
+			numberofseat :$("#numberofseat").val(),
+			custid :$("#custid").val()
+	}
+	
+	$.ajax({
+		url : 'booking.lti',
+		method : 'POST',
+		dataType : 'json',
+		data:JSON.stringify(obj),
+		contentType : 'application/json',
+		success : function(response) {
+			alert(JSON.stringify(response));
+		}
+	.done(function(response){ 
+		$("#server-results").html(response);
+	})
+	})
+})
+</script>
+</head>
+
+<body>
+<form action="path/to/server/script" method="post" id="my_form">
+    No of seats :<input type="number" name="numberofseat" />
+    <label>CustomerId</label>
+    <input type="number" name="custid" /> 
+    <input type="submit" name="submit" value="Book Seats" />
+<div id="server-results"><!-- For server results --></div>
+</form>
+</body>
+</html>

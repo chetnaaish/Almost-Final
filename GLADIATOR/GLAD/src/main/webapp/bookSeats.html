@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Add details</title>
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<script>
+
+$(function(){
+	var custId=2;
+	var routeId=31;
+	var noOfPassengers = 2;
+	for(i = 0; i<noOfPassengers; i++) {
+		var fieldset = $("<fieldset />");
+		$("#passengersForm").append(fieldset);
+		fieldset.append("<legend>Enter Details for Passenger " + (i+1)+"</legend>");
+		$(fieldset).append("Enter name"); //Name
+		var nameInput = $("<input />");
+		nameInput.attr("name", "passengerDetails["+i+"].passengerName");
+		$(fieldset).append(nameInput);
+		
+		$(fieldset).append("<br/>Enter gender");//Gender
+		var genderInput = $("<input />");
+		genderInput.attr("name", "passengerDetails["+i+"].gender");
+		$(fieldset).append(genderInput);
+		
+		
+		  $(fieldset).append("<br>Enter Age: ");//Age
+		  var passengerAge = $("<input/>");
+		  passengerAge.attr("name","passengerDetails["+i+"].age");
+		  $(fieldset).append(passengerAge);
+		  
+		  $(fieldset).append("<br/>Enter Email");//Email
+			var emailInput = $("<input />");
+			emailInput.attr("name", "passengerDetails["+i+"].pemail");
+			$(fieldset).append(emailInput);
+			
+			$(fieldset).append("<br/>Enter Contact No");//ContactNo
+			var numberInput = $("<input />");
+			numberInput.attr("name", "passengerDetails["+i+"].pcontactno");
+			$(fieldset).append(numberInput);
+		
+		$("#passengersForm").append(fieldset);
+		
+	}
+	
+/*	$("#passengersForm").append("<br/>Enter Email"); 
+	var emailId = $("<input />");
+	emailId.attr("name", "email");
+	$("#passengersForm").append(emailId);
+	
+	$("#passengersForm").append("<br/>Enter Contact No");
+	var numberInput = $("<input />");
+	numberInput.attr("name", "contactNo");
+	$("#passengersForm").append(numberInput);*/
+	
+	var custIdHidden = $("<input />");
+	custIdHidden.attr("type", "hidden");
+	custIdHidden.attr("name", "customerId");
+	custIdHidden.attr("value", custId);
+	
+	$("#passengersForm").append(custIdHidden);
+	
+	var routeIdHidden = $("<input />");
+	routeIdHidden.attr("type", "hidden");
+	routeIdHidden.attr("name", "routeId");
+	routeIdHidden.attr("value", routeId);
+	
+	$("#passengersForm").append(routeIdHidden);
+	
+	$("#passengersForm").append("<br/><input type='submit' value='Proceed To Booking' />");
+
+	$("#passengersForm").on("submit", function(evt) {
+		evt.preventDefault();
+		var data = $(this).serialize();
+		alert(data);
+		/*var url = "displayticket.html";
+		$(location).attr('href',url);*/
+		
+		$.ajax({
+		url:'newPassengers.lti',
+		method:'POST',
+		data:data,
+		success:function(response){
+			alert(JSON.stringify(response));
+		          }
+		
+		       })
+	})
+})
+	
+</script>
+</head>
+<body>
+<form id="passengersForm">
+	
+</form>
+</body>
+</html>

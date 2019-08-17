@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>TravelPro - Sign Up</title>
+<style>
+
+table 
+{
+  border: 3px solid black;
+  border-collapse: collapse;
+  border-spacing: 5px;
+  background-color: #eee;
+  
+}
+
+th,td{
+  border: 1px solid black;
+   padding: 15px;
+   border-spacing: 5px;
+}
+
+input[type=text],[type=number] 
+{
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border-radius:5px;
+}
+
+#x{
+text-align:center ;
+font-weight:800;
+font-size:30px;
+font-family: 'Noto Sans KR', sans-serif ;
+}
+
+.btn1{
+font-size: 16px;
+background-color:#89F052;
+  border: none;
+  color: black;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin: 4px 2px;
+  cursor: pointer ;
+}
+
+
+body {
+background-image: url("homepagebg.jpg");
+background-size:cover;
+} 
+</style>
+
+
+
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<script>
+$(function(){
+$("#addDetails").submit(function(evt){
+evt.preventDefault();
+var obj={
+fName : $("#fname").val(),
+lName : $("#lname").val(),
+email : $("#email").val(),
+password : $("#password").val(),
+contactNo : $("#contact").val(),
+wallet : $("#wallet").val()
+
+}
+
+$.ajax({
+url:'addNewData.lti',
+method:'POST',
+data:JSON.stringify(obj),
+contentType:'application/json',
+success:function(response){
+alert(JSON.stringify(response));
+          }
+       })
+    })
+})
+
+</script>
+</head>
+
+<body>
+<p id="x">TRAVELPRO - SIGN UP</p>
+<form id="addDetails">
+<table align=center  border = "3">
+<tr>
+<tr><td>FIRST NAME : <input type='text' id="fname" /></td></tr><br>
+<tr><td>LAST NAME : <input type='text' id="lname" /></td></tr><br>
+<tr><td>EMAIL : <input type='text' id="email" /></td></tr><br>
+<tr><td>PASSWORD : <input type='text' id="password" /></td></tr><br>
+<tr><td>CONTACT NUMBER : <input type='number' id="contact" /></td></tr><br>
+<tr><td>WALLET AMOUNT : <input type='number' id="wallet" /></td></tr><br>
+<tr><td><button type="submit" >Sign Up</button></td></tr>
+</tr>
+</table>
+</form>
+</body>
+</html>

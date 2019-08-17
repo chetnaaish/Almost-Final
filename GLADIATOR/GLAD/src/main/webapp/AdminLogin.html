@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Add details</title>
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<script>
+	$(function() {
+		$("#addDetails").submit(function(evt) {
+			evt.preventDefault();
+			var obj = {
+				adminemail : $("#adminemail").val(),
+				adminpassword : $("#adminpassword").val()
+			}
+			/*	
+			alert (email);
+			alert(password);
+			 */
+
+			$.ajax({
+				url : 'check.lti',
+				method : 'POST',
+				data : JSON.stringify(obj),
+				contentType : 'application/json',
+				success : function(response) {
+					alert(JSON.stringify(response));
+					if (response == true) {
+						alert("DONE");
+					} else {
+						//window.location.href("LOGIN234.html");
+						//$("all").html("Invalid Credentials");
+						alert("wronggggg");
+					}
+				}
+			})
+		})
+	})
+</script>
+</head>
+
+<body>
+	<form id="addDetails">
+
+		Enter Admin Email : <input type='text' id="adminemail" /><br />
+		Enter Admin Password : <input type='text' id="adminpassword" /><br />
+
+		<button type="submit">LOGIN</button>
+	</form>
+</body>
+</html>

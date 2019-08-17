@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Update Bus Details</title>
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<script>
+	$(function() {
+		$("#addDetails").submit(function(evt) {
+			evt.preventDefault();
+			var obj = {
+				busid : $("#busId").val(),
+				busname : $("#busName").val(),
+				source : $("#source").val(),
+				destination : $("#destination").val()
+			}
+			$.ajax({
+				url : 'updatebus.lti',
+				method : 'POST',
+				data : JSON.stringify(obj),
+				contentType : 'application/json',
+				success : function(response) {
+					alert(JSON.stringify(response));
+				}
+			})
+		})
+	})
+</script>
+</head>
+
+<body>
+	<form id="addDetails">
+		Enter BUS ID : <input type='text' id="busId" /><br />
+		 Enter BUSNAME: <input type='text' id="busName" /><br />
+		   Enter SOURCE : <input type='text' id="source" /><br />
+		    Enter DESTINATION : <input type='text' id="destination" /><br />
+
+		<button type="submit">Update Bus Details</button>
+	</form>
+
+
+</body>
